@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerador de Prompts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Gerador de Prompts</h1>
+    <p>Preencha os campos e copie um prompt completo, pronto para colar na IA.</p>
+  </header>
+
+  <main class="layout">
+    <form id="form" class="painel" autocomplete="off">
+      <div class="linha-modelos">
+        <label for="modelo">Começar de um modelo</label>
+        <select id="modelo">
+          <option value="">Em branco</option>
+        </select>
+      </div>
+
+      <fieldset>
+        <legend>Essencial</legend>
+
+        <label for="papel">Papel da IA</label>
+        <input id="papel" name="papel" placeholder="Ex.: um redator publicitário sênior especializado em e-commerce">
+
+        <label for="tarefa">Tarefa <span class="obrigatorio">*</span></label>
+        <textarea id="tarefa" name="tarefa" rows="3" placeholder="Ex.: Escreva a descrição de produto para um tênis de corrida"></textarea>
+
+        <label for="contexto">Contexto</label>
+        <textarea id="contexto" name="contexto" rows="4" placeholder="Informações de fundo que a IA precisa saber: empresa, situação, dados, objetivo final..."></textarea>
+
+        <label for="publico">Público-alvo</label>
+        <input id="publico" name="publico" placeholder="Ex.: corredores iniciantes, 25 a 40 anos">
+      </fieldset>
+
+      <fieldset>
+        <legend>Resposta</legend>
+
+        <div class="grade">
+          <div>
+            <label for="formato">Formato</label>
+            <select id="formato" name="formato">
+              <option value="">Livre</option>
+              <option>Texto corrido</option>
+              <option>Lista com tópicos</option>
+              <option>Passo a passo numerado</option>
+              <option>Tabela</option>
+              <option>E-mail</option>
+              <option>Post para redes sociais</option>
+              <option>Código</option>
+              <option>JSON</option>
+              <option>Resumo executivo</option>
+              <option value="outro">Outro...</option>
+            </select>
+            <input id="formatoOutro" name="formatoOutro" class="oculto" placeholder="Descreva o formato">
+          </div>
+
+          <div>
+            <label for="tom">Tom</label>
+            <select id="tom" name="tom">
+              <option value="">Neutro</option>
+              <option>Profissional</option>
+              <option>Amigável</option>
+              <option>Formal</option>
+              <option>Descontraído</option>
+              <option>Persuasivo</option>
+              <option>Didático</option>
+              <option>Técnico</option>
+              <option>Empático</option>
+              <option>Direto e objetivo</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="tamanho">Tamanho</label>
+            <select id="tamanho" name="tamanho">
+              <option value="">Sem limite</option>
+              <option>Curto (até 100 palavras)</option>
+              <option>Médio (100 a 300 palavras)</option>
+              <option>Longo (300 a 800 palavras)</option>
+              <option>Detalhado (mais de 800 palavras)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="idioma">Idioma da resposta</label>
+            <select id="idioma" name="idioma">
+              <option>Português (Brasil)</option>
+              <option>Inglês</option>
+              <option>Espanhol</option>
+              <option value="">Mesmo idioma da pergunta</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Refinamento</legend>
+
+        <label for="restricoes">Regras e restrições <small>(uma por linha)</small></label>
+        <textarea id="restricoes" name="restricoes" rows="3" placeholder="Não use jargões&#10;Cite fontes quando possível&#10;Evite emojis"></textarea>
+
+        <label for="exemplos">Exemplos de referência</label>
+        <textarea id="exemplos" name="exemplos" rows="3" placeholder="Cole um exemplo do resultado que você espera"></textarea>
+
+        <div class="opcoes">
+          <label class="check"><input type="checkbox" id="passoAPasso" name="passoAPasso"> Pensar passo a passo antes de responder</label>
+          <label class="check"><input type="checkbox" id="perguntar" name="perguntar"> Fazer perguntas se faltar informação</label>
+          <label class="check"><input type="checkbox" id="semInventar" name="semInventar"> Não inventar dados; avisar quando não souber</label>
+        </div>
+      </fieldset>
+
+      <button type="button" id="limpar" class="secundario">Limpar campos</button>
+    </form>
+
+    <section class="painel resultado" aria-live="polite">
+      <div class="cabecalho-resultado">
+        <h2>Seu prompt</h2>
+        <span id="contador" class="contador">0 caracteres</span>
+      </div>
+      <pre id="saida" class="saida"></pre>
+      <button type="button" id="copiar" class="primario">Copiar prompt</button>
+      <p id="aviso" class="aviso" role="status"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
